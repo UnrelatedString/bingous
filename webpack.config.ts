@@ -13,7 +13,7 @@ const config = (
 ): webpack.Configuration => ({
   mode: "production",
   entry: {
-    index: "./web/index.js"
+    index: "./src/index.js"
   },
   output: {
     path: dist,
@@ -29,7 +29,7 @@ const config = (
   plugins: [
     new CopyPlugin({
       patterns: [
-        path.resolve(__dirname, "web/static"),
+        path.resolve(__dirname, "static"),
       ]
     }),
   ],

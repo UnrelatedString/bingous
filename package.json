@@ -16,9 +16,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "spago build",
+    "prebuild": "npm run clean",
+    "build": "spago build && webpack",
     "test": "spago test",
-    "serve": "echo WIP"
+    "serve": "webpack serve"
   },
   "dependencies": {
     "@types/node": "^22.13.10",

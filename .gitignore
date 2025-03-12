@@ -12,3 +12,5 @@ generated-docs/
 .spago
 
 .spec-results
+
+/dist
