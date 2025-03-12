@@ -3,10 +3,10 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Class.Console (log)
+import Test.Spec (pending)
+import Test.Spec.Runner.Node (runSpecAndExitProcess)
+import Test.Spec.Reporter.June.Pretty (prettyReporter)
 
 main :: Effect Unit
-main = do
-  log "🍕"
-  log "You should add some tests."
-
+main = runSpecAndExitProcess [prettyReporter] do
+  pending "anything to test :p"
