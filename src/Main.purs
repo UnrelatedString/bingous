@@ -4,18 +4,18 @@ import Prelude
 
 import Effect (Effect)
 import Halogen as H
-import Halogen.Aff as HA
-import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
+import Halogen.Aff as HAff
+import Halogen.HTML as HTML
+import Halogen.HTML.Events as Events
 import Halogen.VDom.Driver (runUI)
 
 main :: Effect Unit
-main = HA.runHalogenAff do
-  body <- HA.awaitBody
-  runUI component unit body
+main = HAff.runHalogenAff do
+  body <- HAff.awaitBody
+  runUI rootComponent unit body
 
-component :: forall query input output m. H.Component query input output m
-component =
+rootComponent :: forall query input output m. H.Component query input output m
+rootComponent =
   H.mkComponent
     { initialState
     , render
@@ -32,4 +32,4 @@ handleAction :: forall output m. Action -> H.HalogenM State Action () output m U
 handleAction = pure
 
 render :: forall m. State -> H.ComponentHTML Action () m
-render _ = HH.div_ []
+render _ = HTML.div_ []
