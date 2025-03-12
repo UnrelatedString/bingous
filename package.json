@@ -19,6 +19,7 @@
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "build": "spago build && rollup -c rollup.config.ts --configPlugin typescript",
+    "serve": "spago build && rollup -c rollup.config.ts --configPlugin typescript --configServe",
     "test": "spago test"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-html": "^2.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "rollup-plugin-dev": "^1.1.3"
   }
 }
