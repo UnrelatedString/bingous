@@ -18,10 +18,11 @@
     "postinstall": "spago install",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "build": "spago build && rollup -c",
+    "build": "spago build && rollup -c rollup.config.ts --configPlugin typescript",
     "test": "spago test"
   },
   "dependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^22.13.10",
     "@types/webpack": "^5.28.5",
     "copy-webpack-plugin": "^13.0.0",
