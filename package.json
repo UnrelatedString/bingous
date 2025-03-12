@@ -19,8 +19,7 @@
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "build": "spago build && rollup -c",
-    "test": "spago test",
-    "serve": "webpack serve"
+    "test": "spago test"
   },
   "dependencies": {
     "@types/node": "^22.13.10",

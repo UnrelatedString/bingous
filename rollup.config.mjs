@@ -5,12 +5,15 @@ export default {
 	input: 'src/index.js',
 	output: {
 		dir: 'dist',
-		format: 'cjs'
+		format: 'es'
 	},
     plugins: [
-        html(),
+        html({
+            title: "bingous.",
+        }),
         dev({
             dirs: ["dist"],
+            force: true,
         }),
     ],
 };
