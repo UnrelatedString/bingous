@@ -15,6 +15,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "postinstall": "spago install",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "build": "spago build && webpack",
