@@ -32,7 +32,7 @@ const config = (
         path.resolve(__dirname, "web/static"),
       ]
     }),
-  ]
+  ],
 });
 
 export default config;
