@@ -1,0 +1,20 @@
+{
+  "name": "bingous",
+  "version": "0.1.0",
+  "description": "A website for customizing and filling out bingo cards, primarily for social amusement",
+  "homepage": "https://github.com/UnrelatedString/bingous#readme",
+  "bugs": {
+    "url": "https://github.com/UnrelatedString/bingous/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnrelatedString/bingous.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "UnrelatedString",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
