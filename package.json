@@ -15,6 +15,27 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "build": "spago build",
+    "test": "spago test",
+    "serve": "parcel dev/index.html --open",
+    "build-prod": "rm -rf prod && mkdir -p prod && cp dev/index.html prod/ && spago bundle-app --to prod/index.js && parcel build prod/index.html"
+  },
+  "dependencies": {
+    "parcel": "^2.13.3",
+    "pnpm": "^10.6.2",
+    "purescript": "^0.15.15",
+    "spago": "^0.93.43"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "better-sqlite3",
+      "cpu-features",
+      "lmdb",
+      "msgpackr-extract",
+      "purescript",
+      "ssh2"
+    ]
   }
 }

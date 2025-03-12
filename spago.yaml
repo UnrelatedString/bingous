@@ -1,0 +1,20 @@
+package:
+  name: bingous
+  dependencies:
+    - console
+    - effect
+    - prelude
+  test:
+    main: Test.Main
+    dependencies:
+      - spec
+      - spec-quickcheck
+      - spec-node
+      - my-spec-reporter
+workspace:
+  packageSet:
+    registry: 63.5.0
+  extraPackages:
+    my-spec-reporter:
+      git: https://github.com/UnrelatedString/my-spec-reporter.git
+      ref: main
