@@ -15,27 +15,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist",
     "build": "spago build",
     "test": "spago test",
-    "serve": "parcel dev/index.html --open",
-    "build-prod": "rimraf prod && mkdir -p prod && cp static/index.html prod/ && spago bundle-app --to prod/index.js && parcel build prod/index.html"
+    "serve": "echo WIP"
   },
   "dependencies": {
-    "parcel": "^2.13.3",
-    "pnpm": "^10.6.2",
-    "purescript": "^0.15.15",
     "rimraf": "^6.0.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@swc/core",
-      "better-sqlite3",
-      "cpu-features",
-      "lmdb",
-      "msgpackr-extract",
-      "purescript",
-      "ssh2"
-    ]
   }
 }
