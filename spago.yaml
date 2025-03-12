@@ -3,6 +3,7 @@ package:
   dependencies:
     - console
     - effect
+    - halogen
     - prelude
   test:
     main: Test.Main
