@@ -1,5 +1,3 @@
-# can't even test this until I actually make the repo public but whatever
-
 name: Build page and deploy to GitHub Pages
 
 on:
@@ -7,6 +5,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -24,9 +26,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
     environment: # what does this even mean???
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
