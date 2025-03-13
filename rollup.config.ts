@@ -7,7 +7,7 @@ const config = (args: Record<string, any>): RollupOptions => ({
 	input: 'src/index.mjs',
 	output: {
 		dir: 'dist',
-		format: 'iife'
+		format: 'es'
 	},
     plugins: [
         html({
