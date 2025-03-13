@@ -1,0 +1,38 @@
+# can't even test this until I actually make the repo public but whatever
+
+name: Build page and deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node and Spago dependencies
+        run: npm i
+      - name: Build static website
+        run: npm run build
+      - name: Upload /dist as artifact for GitHub Pages deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment: # what does this even mean???
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy straight from artifact
+        uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          reporting_interval: 1000
