@@ -1,6 +1,7 @@
 package:
   name: bingous
   dependencies:
+    - canvas
     - console
     - effect
     - halogen

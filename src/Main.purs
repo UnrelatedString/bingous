@@ -34,4 +34,5 @@ handleAction = pure
 render :: forall m. State -> H.ComponentHTML Action () m
 render _ = HTML.div_
   [ HTML.canvas []
+  , HTML.h2_ [HTML.text "wip :3"]
   ]

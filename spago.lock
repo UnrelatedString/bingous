@@ -5,6 +5,7 @@
         "path": "./",
         "core": {
           "dependencies": [
+            "canvas",
             "console",
             "effect",
             "halogen",
@@ -12,9 +13,11 @@
           ],
           "build_plan": [
             "aff",
+            "arraybuffer-types",
             "arrays",
             "avar",
             "bifunctors",
+            "canvas",
             "catenable-lists",
             "console",
             "const",
@@ -828,6 +831,18 @@
         "newtype",
         "prelude",
         "tuples"
+      ]
+    },
+    "canvas": {
+      "type": "registry",
+      "version": "6.0.0",
+      "integrity": "sha256-Y4L0bTJu4budLhb24ImGUb3s0qvcgja2lPhRDhHRlys=",
+      "dependencies": [
+        "arraybuffer-types",
+        "effect",
+        "exceptions",
+        "functions",
+        "maybe"
       ]
     },
     "catenable-lists": {
