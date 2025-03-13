@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Purescript and Spago
+        run: |
+          npm i -g purescript
+          npm i -g spago@next
       - name: Install Node and Spago dependencies
         run: npm i
       - name: Build static website
