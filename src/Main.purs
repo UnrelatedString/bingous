@@ -6,7 +6,8 @@ import Effect (Effect)
 import Halogen as H
 import Halogen.Aff as HAff
 import Halogen.HTML as HTML
-import Halogen.HTML.Events as Events
+import Halogen.HTML.Events as Event
+import Halogen.HTML.Properties as Prop
 import Halogen.VDom.Driver (runUI)
 
 main :: Effect Unit
@@ -33,6 +34,6 @@ handleAction = pure
 
 render :: forall m. State -> H.ComponentHTML Action () m
 render _ = HTML.div_
-  [ HTML.canvas []
+  [ HTML.canvas [Prop.width 500, Prop.height 500]
   , HTML.h2_ [HTML.text "wip :3"]
   ]
