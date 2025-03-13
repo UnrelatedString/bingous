@@ -32,4 +32,6 @@ handleAction :: forall output m. Action -> H.HalogenM State Action () output m U
 handleAction = pure
 
 render :: forall m. State -> H.ComponentHTML Action () m
-render _ = HTML.div_ []
+render _ = HTML.div_
+  [ HTML.canvas []
+  ]
