@@ -16,9 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Purescript and Spago
-        run: |
-          npm i -g purescript
-          npm i -g spago@next
+        run: npm i -g purescript spago@next
       - name: Install Node and Spago dependencies
         run: npm i
       - name: Build static website
@@ -33,6 +31,9 @@ jobs:
     environment: # what does this even mean???
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Deploy straight from artifact
         uses: actions/deploy-pages@v4
