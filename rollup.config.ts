@@ -4,7 +4,7 @@ import html from '@rollup/plugin-html';
 import terser from '@rollup/plugin-terser';
 
 const config = (args: Record<string, any>): RollupOptions => ({
-	input: 'src/index.js',
+	input: 'src/index.mjs',
 	output: {
 		dir: 'dist',
 		format: 'iife'
