@@ -36,4 +36,19 @@ render :: forall m. State -> H.ComponentHTML Action () m
 render _ = HTML.div_
   [ HTML.canvas [Prop.width 500, Prop.height 500]
   , HTML.h2_ [HTML.text "wip :3"]
+  , attribution
+  ]
+
+
+
+attribution :: forall w i. HTML.HTML w i
+attribution = HTML.div_
+  [ HTML.p [{- TODO: font family monospace -}] 
+    [ HTML.text "made with "
+    , HTML.b_ [HTML.text "halogen"]
+    , HTML.text " and sheer force of will (including to not make this footer look better). (c) UnrelatedString 2025. "
+    ]
+  , HTML.a [Prop.href "https://github.com/UnrelatedString/bingous"]
+    [ HTML.text "github.com/UnrelatedString/bingous"
+    ]
   ]

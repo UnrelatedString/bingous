@@ -5,6 +5,7 @@ package:
     - console
     - effect
     - halogen
+    - halogen-css
     - prelude
   test:
     main: Test.Main
