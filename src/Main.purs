@@ -14,7 +14,12 @@ import CSS as CSS
 import CSS.Font as Font
 import Data.NonEmpty ((:|))
 import Data.Int (toNumber)
+import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
+import Halogen.Canvas.Interact as CanvI
+import Graphics.Canvas.Free (CanvasT)
+import Control.Monad.Rec.Class (class MonadRec)
+import Effect.Aff.Class (class MonadAff)
 
 main :: Effect Unit
 main = HAff.runHalogenAff do
@@ -33,20 +38,31 @@ type Point = { x :: Number, y :: Number }
 
 type State = Point
 data Action = Click Point
+            | Ignore
+
+type RootSlots = ( canvas :: forall m. MonadAff m => MonadRec m => H.Slot (CanvasT m) Void Int )
+
+_canvas :: Proxy "canvas"
+_canvas = Proxy
+
+data ComponentIndices = TheCanvas
+derive instance Eq ComponentIndices
+derive instance Ord ComponentIndices
 
 initialState :: forall input. input -> State
 initialState _ = { x: 0.0, y: 0.0 }
 
-handleAction :: forall output m. Action -> H.HalogenM State Action () output m Unit
+handleAction :: forall output m. Action -> H.HalogenM State Action RootSlots output m Unit
 handleAction (Click {x, y}) = H.modify_ $ const {x, y}
+handleAction Ignore = pure unit
 
-render :: forall m. State -> H.ComponentHTML Action () m
+handleCanvasOutput :: CanvI.Output -> Action
+handleCanvasOutput (CanvI.MouseEvent (CanvI.Click e) _) = Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
+handleCanvasOutput _ = Ignore
+
+render :: forall m. State -> H.ComponentHTML Action RootSlots m
 render _ = HTML.div_
-  [ HTML.canvas
-    [ Prop.width 500
-    , Prop.height 500
-    , Event.onClick \e -> Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
-    ]
+  [ HTML.slot _canvas TheCanvas CanvI.component { width: 500, height: 500 } handleCanvasOutput
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]

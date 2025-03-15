@@ -5,19 +5,21 @@
         "path": "./",
         "core": {
           "dependencies": [
-            "canvas",
             "console",
             "effect",
             "halogen",
+            "halogen-canvas",
             "halogen-css",
             "integers",
             "nonempty",
             "prelude",
+            "tailrec",
             "web-cssom",
             "web-uievents"
           ],
           "build_plan": [
             "aff",
+            "aff-promise",
             "arraybuffer-types",
             "arrays",
             "avar",
@@ -48,6 +50,7 @@
             "functors",
             "gen",
             "halogen",
+            "halogen-canvas",
             "halogen-css",
             "halogen-subscriptions",
             "halogen-vdom",
@@ -750,6 +753,15 @@
         "unsafe-coerce"
       ]
     },
+    "aff-promise": {
+      "type": "registry",
+      "version": "4.0.0",
+      "integrity": "sha256-Kq5EupbUpXeUXx4JqGQE7/RTTz/H6idzWhsocwlEFhM=",
+      "dependencies": [
+        "aff",
+        "foreign"
+      ]
+    },
     "ansi": {
       "type": "registry",
       "version": "7.0.0",
@@ -1217,6 +1229,17 @@
         "unsafe-reference",
         "web-file",
         "web-uievents"
+      ]
+    },
+    "halogen-canvas": {
+      "type": "registry",
+      "version": "1.0.0",
+      "integrity": "sha256-EF8JcV+awSWBcKVsZnCZkKXvu/YM6dAA8KysL/aq+94=",
+      "dependencies": [
+        "aff-promise",
+        "canvas",
+        "colors",
+        "halogen"
       ]
     },
     "halogen-css": {

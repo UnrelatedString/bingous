@@ -1,14 +1,15 @@
 package:
   name: bingous
   dependencies:
-    - canvas
     - console
     - effect
     - halogen
+    - halogen-canvas
     - halogen-css
     - integers
     - nonempty
     - prelude
+    - tailrec
     - web-cssom
     - web-uievents
   test:
