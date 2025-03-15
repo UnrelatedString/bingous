@@ -10,8 +10,11 @@
             "effect",
             "halogen",
             "halogen-css",
+            "integers",
             "nonempty",
-            "prelude"
+            "prelude",
+            "web-cssom",
+            "web-uievents"
           ],
           "build_plan": [
             "aff",
@@ -87,6 +90,7 @@
             "unsafe-coerce",
             "unsafe-reference",
             "web-clipboard",
+            "web-cssom",
             "web-dom",
             "web-events",
             "web-file",
@@ -2018,6 +2022,16 @@
       "dependencies": [
         "js-promise",
         "web-html"
+      ]
+    },
+    "web-cssom": {
+      "type": "registry",
+      "version": "2.0.0",
+      "integrity": "sha256-lyplmD0EpltKxPC6QJt1RQrrwurC9x/wigiTf9IrK2o=",
+      "dependencies": [
+        "web-dom",
+        "web-html",
+        "web-uievents"
       ]
     },
     "web-dom": {

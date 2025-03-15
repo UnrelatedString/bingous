@@ -6,8 +6,11 @@ package:
     - effect
     - halogen
     - halogen-css
+    - integers
     - nonempty
     - prelude
+    - web-cssom
+    - web-uievents
   test:
     main: Test.Main
     dependencies:
