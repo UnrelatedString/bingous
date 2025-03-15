@@ -4,7 +4,6 @@ package:
     - console
     - effect
     - halogen
-    - halogen-canvas
     - halogen-css
     - integers
     - nonempty

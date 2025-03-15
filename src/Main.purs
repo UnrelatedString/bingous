@@ -16,8 +16,6 @@ import Data.NonEmpty ((:|))
 import Data.Int (toNumber)
 import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
-import Halogen.Canvas.Interact as CanvI
-import Graphics.Canvas.Free (CanvasT)
 import Control.Monad.Rec.Class (class MonadRec)
 import Effect.Aff.Class (class MonadAff)
 
@@ -26,7 +24,7 @@ main = HAff.runHalogenAff do
   body <- HAff.awaitBody
   runUI rootComponent unit body
 
-rootComponent :: forall query input output m. MonadAff m => MonadRec m => H.Component query input output m
+rootComponent :: forall query input output m. H.Component query input output m
 rootComponent =
   H.mkComponent
     { initialState
@@ -40,7 +38,7 @@ type State = Point
 data Action = Click Point
             | Ignore
 
-type RootSlots m = ( canvas :: H.Slot (CanvasT m) CanvI.Output ComponentIndices )
+type RootSlots m = ( canvas :: forall query. H.Slot query Void ComponentIndices )
 
 _canvas :: Proxy "canvas"
 _canvas = Proxy
@@ -52,17 +50,13 @@ derive instance Ord ComponentIndices
 initialState :: forall input. input -> State
 initialState _ = { x: 0.0, y: 0.0 }
 
-handleAction :: forall output m. MonadAff m => MonadRec m => Action -> H.HalogenM State Action (RootSlots m) output m Unit
+handleAction :: forall output m. Action -> H.HalogenM State Action (RootSlots m) output m Unit
 handleAction (Click {x, y}) = H.modify_ $ const {x, y}
 handleAction Ignore = pure unit
 
-handleCanvasOutput :: CanvI.Output -> Action
-handleCanvasOutput (CanvI.MouseEvent (CanvI.Click e) _) = Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
-handleCanvasOutput _ = Ignore
-
-render :: forall m. MonadAff m => MonadRec m => State -> H.ComponentHTML Action (RootSlots m) m
+render :: forall m. State -> H.ComponentHTML Action (RootSlots m) m
 render _ = HTML.div_
-  [ HTML.slot _canvas TheCanvas CanvI.component { width: 500, height: 500 } handleCanvasOutput
+  [ HTML.slot_ _canvas TheCanvas canvasssss { width: 500, height: 500 }
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
@@ -83,3 +77,11 @@ attribution = HTML.footer [style cutesyFooterStyle]
     [ HTML.text "github.com/UnrelatedString/bingous"
     ]
   ]
+
+canvasssss :: forall query output m. H.Component query {width :: Int, height :: Int} output m
+canvasssss =
+  H.mkComponent
+    { initialState: identity
+    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height]
+    , eval: H.mkEval H.defaultEval
+    }
