@@ -9,6 +9,7 @@
             "console",
             "effect",
             "halogen",
+            "halogen-css",
             "prelude"
           ],
           "build_plan": [
@@ -19,10 +20,12 @@
             "bifunctors",
             "canvas",
             "catenable-lists",
+            "colors",
             "console",
             "const",
             "contravariant",
             "control",
+            "css",
             "datetime",
             "distributive",
             "dom-indexed",
@@ -41,6 +44,7 @@
             "functors",
             "gen",
             "halogen",
+            "halogen-css",
             "halogen-subscriptions",
             "halogen-vdom",
             "identity",
@@ -49,6 +53,7 @@
             "js-date",
             "js-promise",
             "lazy",
+            "lcg",
             "lists",
             "maybe",
             "media-types",
@@ -63,11 +68,16 @@
             "partial",
             "prelude",
             "profunctor",
+            "quickcheck",
+            "quickcheck-laws",
+            "random",
+            "record",
             "refs",
             "safe-coerce",
             "st",
             "strings",
             "tailrec",
+            "these",
             "transformers",
             "tuples",
             "type-equality",
@@ -859,6 +869,19 @@
         "unfoldable"
       ]
     },
+    "colors": {
+      "type": "registry",
+      "version": "7.0.1",
+      "integrity": "sha256-udlg/y2PFsHYli8Tgz8BQGGrOjyGo0BcJj36IfgYADs=",
+      "dependencies": [
+        "arrays",
+        "integers",
+        "lists",
+        "numbers",
+        "partial",
+        "strings"
+      ]
+    },
     "console": {
       "type": "registry",
       "version": "6.1.0",
@@ -897,6 +920,21 @@
       "dependencies": [
         "newtype",
         "prelude"
+      ]
+    },
+    "css": {
+      "type": "registry",
+      "version": "6.0.0",
+      "integrity": "sha256-zfSHxgiU4rSWuVxMjSKKh+s7j433wxmsr+CqI6hm9s4=",
+      "dependencies": [
+        "colors",
+        "console",
+        "effect",
+        "nonempty",
+        "profunctor",
+        "strings",
+        "these",
+        "transformers"
       ]
     },
     "datetime": {
@@ -1174,6 +1212,15 @@
         "unsafe-reference",
         "web-file",
         "web-uievents"
+      ]
+    },
+    "halogen-css": {
+      "type": "registry",
+      "version": "10.0.0",
+      "integrity": "sha256-ZKz2cSbfkcY2faMDwSGu7pa2P8aEHPv/a03Hnyy+mdw=",
+      "dependencies": [
+        "css",
+        "halogen"
       ]
     },
     "halogen-subscriptions": {
@@ -1682,6 +1729,15 @@
         "unfoldable"
       ]
     },
+    "quickcheck-laws": {
+      "type": "registry",
+      "version": "7.0.0",
+      "integrity": "sha256-rnzVTiDnymzYkvnhI8EvPwrmO8LgcTnrMTuiI172Tkc=",
+      "dependencies": [
+        "enums",
+        "quickcheck"
+      ]
+    },
     "random": {
       "type": "registry",
       "version": "6.0.0",
@@ -1847,6 +1903,19 @@
         "partial",
         "prelude",
         "refs"
+      ]
+    },
+    "these": {
+      "type": "registry",
+      "version": "6.0.0",
+      "integrity": "sha256-6poQvFzGw7Ir9mTDEbFV9N6+cUeSHe0FdzTR2ZK1o6g=",
+      "dependencies": [
+        "arrays",
+        "gen",
+        "lists",
+        "quickcheck",
+        "quickcheck-laws",
+        "tuples"
       ]
     },
     "transformers": {
