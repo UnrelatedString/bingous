@@ -46,10 +46,11 @@ render _ = HTML.div_
 cutesyFooterStyle :: CSS.CSS
 cutesyFooterStyle = do
   CSS.fontFamily ["DejaVu Sans Mono"] (Font.monospace :| [])
+  CSS.fontSize $ CSS.px 9.5
 
 attribution :: forall w i. HTML.HTML w i
-attribution = HTML.div_
-  [ HTML.p [style cutesyFooterStyle] 
+attribution = HTML.footer [style cutesyFooterStyle]
+  [ HTML.p_ 
     [ HTML.text "made with "
     , HTML.b_ [HTML.text "halogen"]
     , HTML.text " and sheer force of will. (c) UnrelatedString 2025. "
