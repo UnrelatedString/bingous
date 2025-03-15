@@ -7,8 +7,12 @@ import Halogen as H
 import Halogen.Aff as HAff
 import Halogen.HTML as HTML
 import Halogen.HTML.Events as Event
+import Halogen.HTML.CSS (style)
 import Halogen.HTML.Properties as Prop
 import Halogen.VDom.Driver (runUI)
+import CSS as CSS
+import CSS.Font as Font
+import Data.NonEmpty ((:|))
 
 main :: Effect Unit
 main = HAff.runHalogenAff do
@@ -39,14 +43,16 @@ render _ = HTML.div_
   , attribution
   ]
 
-
+cutesyFooterStyle :: CSS.CSS
+cutesyFooterStyle = do
+  CSS.fontFamily ["DejaVu Sans Mono"] (Font.monospace :| [])
 
 attribution :: forall w i. HTML.HTML w i
 attribution = HTML.div_
-  [ HTML.p [{- TODO: font family monospace -}] 
+  [ HTML.p [style cutesyFooterStyle] 
     [ HTML.text "made with "
     , HTML.b_ [HTML.text "halogen"]
-    , HTML.text " and sheer force of will (including to not make this footer look better). (c) UnrelatedString 2025. "
+    , HTML.text " and sheer force of will. (c) UnrelatedString 2025. "
     ]
   , HTML.a [Prop.href "https://github.com/UnrelatedString/bingous"]
     [ HTML.text "github.com/UnrelatedString/bingous"

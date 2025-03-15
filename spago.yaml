@@ -6,6 +6,7 @@ package:
     - effect
     - halogen
     - halogen-css
+    - nonempty
     - prelude
   test:
     main: Test.Main

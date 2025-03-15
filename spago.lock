@@ -10,6 +10,7 @@
             "effect",
             "halogen",
             "halogen-css",
+            "nonempty",
             "prelude"
           ],
           "build_plan": [
