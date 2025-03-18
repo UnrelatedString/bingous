@@ -1,4 +1,4 @@
-# bingous
+# [bingous.org](https://bingous.org)
 
 [![Deploy](https://github.com/UnrelatedString/bingous/actions/workflows/deploy.yml/badge.svg)](https://github.com/UnrelatedString/bingous/actions/workflows/deploy.yml)
 ![Latest Version Tag](https://img.shields.io/github/v/tag/UnrelatedString/bingous)
