@@ -24,7 +24,7 @@ main = HAff.runHalogenAff do
   body <- HAff.awaitBody
   runUI rootComponent unit body
 
-rootComponent :: forall query input output m. H.Component query input output m
+rootComponent :: forall query input output m. MonadEffect m => H.Component query input output m
 rootComponent =
   H.mkComponent
     { initialState
@@ -50,11 +50,11 @@ derive instance Ord ComponentIndices
 initialState :: forall input. input -> State
 initialState _ = { x: 0.0, y: 0.0 }
 
-handleAction :: forall output m. Action -> H.HalogenM State Action (RootSlots m) output m Unit
+handleAction :: forall output m. MonadEffect m => Action -> H.HalogenM State Action (RootSlots m) output m Unit
 handleAction (Click {x, y}) = H.modify_ $ const {x, y}
 handleAction Ignore = pure unit
 
-render :: forall m. State -> H.ComponentHTML Action (RootSlots m) m
+render :: forall m. MonadEffect m => State -> H.ComponentHTML Action (RootSlots m) m
 render _ = HTML.div_
   [ HTML.slot_ _canvas TheCanvas canvasssss { width: 500, height: 500 }
   , HTML.h2_ [HTML.text "wip :3"]
@@ -78,10 +78,10 @@ attribution = HTML.footer [style cutesyFooterStyle]
     ]
   ]
 
-canvasssss :: forall query output m. H.Component query {width :: Int, height :: Int} output m
+canvasssss :: forall query output m. MonadEffect m => H.Component query {width :: Int, height :: Int} output m
 canvasssss =
   H.mkComponent
     { initialState: identity
-    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height]
-    , eval: H.mkEval H.defaultEval
+    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel")]
+    , eval: H.mkEval H.defaultEval { handleAction =  }
     }
