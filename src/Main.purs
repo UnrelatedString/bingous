@@ -88,12 +88,15 @@ attribution = HTML.footer [style cutesyFooterStyle]
     ]
   ]
 
+canvasLabel :: H.RefLabel
+canvasLabel = H.RefLabel "theLabel"
+
 canvasssss :: forall query output m. MonadEffect m => H.Component query {width :: Int, height :: Int} output m
 canvasssss =
   H.mkComponent
     { initialState: identity
-    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel"), Event.onClick (const unit)]
-    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef (H.RefLabel "thelabel") >>= traverse_ \elem -> liftEffect do
+    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref canvasLabel, Event.onClick (const unit)]
+    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef canvasLabel >>= traverse_ \elem -> liftEffect do
       logShow =<< offsetTop elem
       logShow =<< offsetLeft elem }
     }
