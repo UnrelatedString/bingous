@@ -3,7 +3,7 @@ module Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Class (class MonadEffect)
+import Effect.Class (class MonadEffect, liftEffect)
 import Halogen as H
 import Halogen.Aff as HAff
 import Halogen.HTML as HTML
@@ -24,6 +24,7 @@ import Web.HTML.HTMLElement (offsetTop, offsetLeft)
 import Effect.Console (logShow)
 import Data.Profunctor.Strong ((&&&))
 import Data.Tuple (uncurry)
+import Data.Traversable (traverse_)
 
 main :: Effect Unit
 main = HAff.runHalogenAff do
@@ -44,12 +45,14 @@ type State = Point
 data Action = Click Point
             | Ignore
 
+type RootSlots :: forall k. k -> Row Type
 type RootSlots m = ( canvas :: forall query. H.Slot query Void ComponentIndices )
 
 _canvas :: Proxy "canvas"
 _canvas = Proxy
 
 data ComponentIndices = TheCanvas
+                      | TheOtherCanvas
 derive instance Eq ComponentIndices
 derive instance Ord ComponentIndices
 
@@ -63,6 +66,7 @@ handleAction Ignore = pure unit
 render :: forall m. MonadEffect m => State -> H.ComponentHTML Action (RootSlots m) m
 render _ = HTML.div_
   [ HTML.slot_ _canvas TheCanvas canvasssss { width: 500, height: 500 }
+  , HTML.slot_ _canvas TheOtherCanvas canvasssss { width: 500, height: 500 }
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
@@ -89,5 +93,7 @@ canvasssss =
   H.mkComponent
     { initialState: identity
     , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel")]
-    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef (H.RefLabel "thelabel") >>= flip bind ((offsetTop &&& offsetLeft) >>> uncurry (*>) >=> logShow) }
+    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef (H.RefLabel "thelabel") >>= traverse_ \elem -> liftEffect do
+      logShow =<< offsetTop elem
+      logShow =<< offsetLeft elem }
     }
