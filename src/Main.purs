@@ -3,6 +3,7 @@ module Main where
 import Prelude
 
 import Effect (Effect)
+import Effect.Class (class MonadEffect)
 import Halogen as H
 import Halogen.Aff as HAff
 import Halogen.HTML as HTML
@@ -18,6 +19,11 @@ import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import Control.Monad.Rec.Class (class MonadRec)
 import Effect.Aff.Class (class MonadAff)
+
+import Web.HTML.HTMLElement (offsetTop, offsetLeft)
+import Effect.Console (logShow)
+import Data.Profunctor.Strong ((&&&))
+import Data.Tuple (uncurry)
 
 main :: Effect Unit
 main = HAff.runHalogenAff do
@@ -83,5 +89,5 @@ canvasssss =
   H.mkComponent
     { initialState: identity
     , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel")]
-    , eval: H.mkEval H.defaultEval { handleAction =  }
+    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef (H.RefLabel "thelabel") >>= flip bind ((offsetTop &&& offsetLeft) >>> uncurry (*>) >=> logShow) }
     }
