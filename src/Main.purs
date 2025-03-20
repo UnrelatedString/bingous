@@ -92,7 +92,7 @@ canvasssss :: forall query output m. MonadEffect m => H.Component query {width :
 canvasssss =
   H.mkComponent
     { initialState: identity
-    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel")]
+    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref (H.RefLabel "thelabel"), Event.onClick (const unit)]
     , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef (H.RefLabel "thelabel") >>= traverse_ \elem -> liftEffect do
       logShow =<< offsetTop elem
       logShow =<< offsetLeft elem }
