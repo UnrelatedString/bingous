@@ -11,6 +11,7 @@ import Halogen.HTML.Events as Event
 import Halogen.HTML.CSS (style)
 import Halogen.HTML.Properties as Prop
 import Halogen.VDom.Driver (runUI)
+import Halogen.Canvas.Declarative (declarativeCanvas)
 import CSS as CSS
 import CSS.Font as Font
 import Data.NonEmpty ((:|))
@@ -20,8 +21,9 @@ import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import Control.Monad.Rec.Class (class MonadRec)
 import Effect.Aff.Class (class MonadAff)
 
+import Graphics.Canvas (Context2D, arc, strokePath)
 import Web.HTML.HTMLElement (offsetTop, offsetLeft)
-import Effect.Console (logShow)
+import Data.Number (tau)
 import Data.Profunctor.Strong ((&&&))
 import Data.Tuple (uncurry)
 import Data.Traversable (traverse_)
@@ -52,7 +54,6 @@ _canvas :: Proxy "canvas"
 _canvas = Proxy
 
 data ComponentIndices = TheCanvas
-                      | TheOtherCanvas
 derive instance Eq ComponentIndices
 derive instance Ord ComponentIndices
 
@@ -64,12 +65,25 @@ handleAction (Click {x, y}) = H.modify_ $ const {x, y}
 handleAction Ignore = pure unit
 
 render :: forall m. MonadEffect m => State -> H.ComponentHTML Action (RootSlots m) m
-render _ = HTML.div_
-  [ HTML.slot_ _canvas TheCanvas canvasssss { width: 500, height: 500 }
-  , HTML.slot_ _canvas TheOtherCanvas canvasssss { width: 500, height: 500 }
+render state = HTML.div
+  [ Event.onClick \e -> Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
+  ]
+  [ HTML.slot_ _canvas TheCanvas declarativeCanvas { width: 500, height: 500, draw: draw state }
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
+
+draw :: State -> Context2D -> Effect Unit
+draw state ctx = do
+  let { x, y } = state
+  strokePath ctx do
+    arc ctx
+      { x, y
+      , radius: 20.0
+      , start: 0.0
+      , end: tau
+      , useCounterClockwise: false
+      }
 
 cutesyFooterStyle :: CSS.CSS
 cutesyFooterStyle = do
@@ -87,16 +101,3 @@ attribution = HTML.footer [style cutesyFooterStyle]
     [ HTML.text "github.com/UnrelatedString/bingous"
     ]
   ]
-
-canvasLabel :: H.RefLabel
-canvasLabel = H.RefLabel "theLabel"
-
-canvasssss :: forall query output m. MonadEffect m => H.Component query {width :: Int, height :: Int} output m
-canvasssss =
-  H.mkComponent
-    { initialState: identity
-    , render: \{width, height} -> HTML.canvas [Prop.width width, Prop.height height, Prop.ref canvasLabel, Event.onClick (const unit)]
-    , eval: H.mkEval H.defaultEval { handleAction = \_ -> H.getHTMLElementRef canvasLabel >>= traverse_ \elem -> liftEffect do
-      logShow =<< offsetTop elem
-      logShow =<< offsetLeft elem }
-    }

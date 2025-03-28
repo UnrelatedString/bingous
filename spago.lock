@@ -5,12 +5,15 @@
         "path": "./",
         "core": {
           "dependencies": [
+            "canvas",
             "console",
             "effect",
             "halogen",
             "halogen-css",
+            "halogen-declarative-canvas",
             "integers",
             "nonempty",
+            "numbers",
             "prelude",
             "tailrec",
             "web-cssom",
@@ -18,9 +21,11 @@
           ],
           "build_plan": [
             "aff",
+            "arraybuffer-types",
             "arrays",
             "avar",
             "bifunctors",
+            "canvas",
             "catenable-lists",
             "colors",
             "console",
@@ -47,6 +52,7 @@
             "gen",
             "halogen",
             "halogen-css",
+            "halogen-declarative-canvas",
             "halogen-subscriptions",
             "halogen-vdom",
             "identity",
@@ -718,6 +724,9 @@
       }
     },
     "extra_packages": {
+      "halogen-declarative-canvas": {
+        "path": "../purescript-halogen-declarative-canvas"
+      },
       "my-spec-reporter": {
         "git": "https://github.com/UnrelatedString/my-spec-reporter.git",
         "ref": "main"
@@ -844,6 +853,18 @@
         "newtype",
         "prelude",
         "tuples"
+      ]
+    },
+    "canvas": {
+      "type": "registry",
+      "version": "6.0.0",
+      "integrity": "sha256-Y4L0bTJu4budLhb24ImGUb3s0qvcgja2lPhRDhHRlys=",
+      "dependencies": [
+        "arraybuffer-types",
+        "effect",
+        "exceptions",
+        "functions",
+        "maybe"
       ]
     },
     "catenable-lists": {
@@ -1212,6 +1233,19 @@
       "dependencies": [
         "css",
         "halogen"
+      ]
+    },
+    "halogen-declarative-canvas": {
+      "type": "local",
+      "path": "../purescript-halogen-declarative-canvas",
+      "dependencies": [
+        "canvas",
+        "foldable-traversable",
+        "halogen",
+        "maybe",
+        "prelude",
+        "unsafe-coerce",
+        "web-html"
       ]
     },
     "halogen-subscriptions": {

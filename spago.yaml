@@ -1,12 +1,15 @@
 package:
   name: bingous
   dependencies:
+    - canvas
     - console
     - effect
     - halogen
     - halogen-css
+    - halogen-declarative-canvas
     - integers
     - nonempty
+    - numbers
     - prelude
     - tailrec
     - web-cssom
@@ -25,3 +28,5 @@ workspace:
     my-spec-reporter:
       git: https://github.com/UnrelatedString/my-spec-reporter.git
       ref: main
+    halogen-declarative-canvas:
+      path: ../purescript-halogen-declarative-canvas
