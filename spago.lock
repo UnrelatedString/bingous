@@ -725,7 +725,8 @@
     },
     "extra_packages": {
       "halogen-declarative-canvas": {
-        "path": "../purescript-halogen-declarative-canvas"
+        "git": "https://github.com/UnrelatedString/purescript-halogen-declarative-canvas.git",
+        "ref": "main"
       },
       "my-spec-reporter": {
         "git": "https://github.com/UnrelatedString/my-spec-reporter.git",
@@ -1236,10 +1237,12 @@
       ]
     },
     "halogen-declarative-canvas": {
-      "type": "local",
-      "path": "../purescript-halogen-declarative-canvas",
+      "type": "git",
+      "url": "https://github.com/UnrelatedString/purescript-halogen-declarative-canvas.git",
+      "rev": "4a13977bf465c28ad336c601b7c561077c3a949f",
       "dependencies": [
         "canvas",
+        "effect",
         "foldable-traversable",
         "halogen",
         "maybe",

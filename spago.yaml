@@ -29,4 +29,5 @@ workspace:
       git: https://github.com/UnrelatedString/my-spec-reporter.git
       ref: main
     halogen-declarative-canvas:
-      path: ../purescript-halogen-declarative-canvas
+      git: https://github.com/UnrelatedString/purescript-halogen-declarative-canvas.git
+      ref: main
