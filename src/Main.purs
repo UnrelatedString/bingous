@@ -94,7 +94,7 @@ attribution :: forall w i. HTML.HTML w i
 attribution = HTML.footer [style cutesyFooterStyle]
   [ HTML.p_ 
     [ HTML.text "made with "
-    , HTML.b_ [HTML.text "halogen"]
+    , HTML.b_ [HTML.text "purescript halogen"]
     , HTML.text " and sheer force of will. (c) UnrelatedString 2025."
     ]
   , HTML.a [Prop.href "https://github.com/UnrelatedString/bingous"]
