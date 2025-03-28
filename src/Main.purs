@@ -3,7 +3,7 @@ module Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Class (class MonadEffect, liftEffect)
+import Effect.Class (class MonadEffect)
 import Halogen as H
 import Halogen.Aff as HAff
 import Halogen.HTML as HTML
@@ -18,15 +18,9 @@ import Data.NonEmpty ((:|))
 import Data.Int (toNumber)
 import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
-import Control.Monad.Rec.Class (class MonadRec)
-import Effect.Aff.Class (class MonadAff)
 
 import Graphics.Canvas (Context2D, arc, strokePath)
-import Web.HTML.HTMLElement (offsetTop, offsetLeft)
 import Data.Number (tau)
-import Data.Profunctor.Strong ((&&&))
-import Data.Tuple (uncurry)
-import Data.Traversable (traverse_)
 
 main :: Effect Unit
 main = HAff.runHalogenAff do
