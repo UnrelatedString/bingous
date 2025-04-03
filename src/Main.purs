@@ -38,8 +38,13 @@ rootComponent =
 
 type Point = { x :: Number, y :: Number }
 
-type State = Point
+type State =
+  { clicked :: Point
+  , inputUrl :: String
+  }
+
 data Action = Click Point
+            | UrlInput String
             | Ignore
 
 type RootSlots :: forall k. k -> Row Type
@@ -53,10 +58,14 @@ derive instance Eq ComponentIndices
 derive instance Ord ComponentIndices
 
 initialState :: forall input. input -> State
-initialState _ = { x: 0.0, y: 0.0 }
+initialState _ = 
+  { clicked: { x: 0.0, y: 0.0 }
+  , inputUrl: ""
+  }
 
 handleAction :: forall output m. MonadEffect m => Action -> H.HalogenM State Action (RootSlots m) output m Unit
-handleAction (Click {x, y}) = H.modify_ $ const {x, y}
+handleAction (Click {x, y}) = H.modify_ _{clicked = {x, y}}
+handleAction (UrlInput url) = H.modify_ _{inputUrl = url}
 handleAction Ignore = pure unit
 
 render :: forall m. MonadEffect m => State -> H.ComponentHTML Action (RootSlots m) m
@@ -66,7 +75,7 @@ render state = HTML.div
   [ HTML.slot_ _canvas TheCanvas declarativeCanvas { width: 500, height: 500, draw: draw state }
   , HTML.form_
     [ HTML.p_ [HTML.text "Enter image URL for background or existing card:"]
-    , HTML.input [Prop.type_ InputUrl]
+    , HTML.input [Prop.type_ InputUrl, Event.onValueInput UrlInput]
     ]
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
@@ -74,7 +83,7 @@ render state = HTML.div
 
 draw :: State -> Context2D -> Effect Unit
 draw state ctx = do
-  let { x, y } = state
+  let { x, y } = state.clicked
   strokePath ctx do
     arc ctx
       { x, y
