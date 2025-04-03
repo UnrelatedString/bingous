@@ -77,6 +77,8 @@ render state = HTML.div
     [ HTML.p_ [HTML.text "Enter image URL for background or existing card:"]
     , HTML.input [Prop.type_ InputUrl, Event.onValueInput UrlInput]
     ]
+  , HTML.p_ [HTML.text $ "You entered: " <> state.inputUrl]
+  , HTML.img [Prop.src state.inputUrl]
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
