@@ -20,10 +20,6 @@ import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import DOM.HTML.Indexed.InputType (InputType(InputUrl))
 
-import Web.HTML (window)
-import Web.HTML.Window (document)
-import Web.DOM.Document ()
-
 import Graphics.Canvas (Context2D, arc, strokePath)
 import Data.Number (tau)
 
@@ -91,10 +87,14 @@ render state = HTML.div
   , attribution
   ]
 
+foreign import drawTheImageIGuess :: Context2D -> String -> Effect Unit
+
 draw :: State -> Context2D -> Effect Unit
 draw state ctx = do
   -- shit I just realized uh. how do I make sure the image actually loaded and rendered?? maybe I should blob
   -- whatever I'll at least try this
+
+  drawTheImageIGuess ctx bgPreviewImgId
 
   let { x, y } = state.clicked
   strokePath ctx do
