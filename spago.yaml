@@ -3,6 +3,7 @@ package:
   dependencies:
     - canvas
     - console
+    - dom-indexed
     - effect
     - halogen
     - halogen-css
@@ -23,7 +24,7 @@ package:
       - my-spec-reporter
 workspace:
   packageSet:
-    registry: 63.5.0
+    registry: 63.9.0
   extraPackages:
     my-spec-reporter:
       git: https://github.com/UnrelatedString/my-spec-reporter.git

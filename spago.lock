@@ -7,6 +7,7 @@
           "dependencies": [
             "canvas",
             "console",
+            "dom-indexed",
             "effect",
             "halogen",
             "halogen-css",
@@ -197,7 +198,7 @@
     },
     "package_set": {
       "address": {
-        "registry": "63.5.0"
+        "registry": "63.9.0"
       },
       "compiler": ">=0.15.15 <0.16.0",
       "content": {
@@ -237,6 +238,7 @@
         "b64": "0.0.8",
         "barbies": "1.0.1",
         "barlow-lens": "0.9.0",
+        "benchlib": "0.0.1",
         "bifunctors": "6.0.0",
         "bigints": "7.0.1",
         "bolson": "0.3.9",
@@ -356,6 +358,7 @@
         "generic-router": "0.0.1",
         "geojson": "0.0.5",
         "geometria": "2.2.0",
+        "gesso": "1.0.0",
         "gojs": "0.1.1",
         "grain": "3.0.0",
         "grain-router": "3.0.0",
@@ -366,6 +369,7 @@
         "halogen-bootstrap5": "5.3.2",
         "halogen-canvas": "1.0.0",
         "halogen-css": "10.0.0",
+        "halogen-declarative-canvas": "0.0.8",
         "halogen-echarts-simple": "0.0.4",
         "halogen-formless": "4.0.3",
         "halogen-helix": "1.0.1",
@@ -575,6 +579,7 @@
         "refs": "6.0.0",
         "remotedata": "5.0.1",
         "repr": "0.5.0",
+        "resize-arrays": "0.0.1",
         "resize-observer": "1.0.0",
         "resource": "2.0.1",
         "resourcet": "1.0.0",

@@ -18,6 +18,7 @@ import Data.NonEmpty ((:|))
 import Data.Int (toNumber)
 import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
+import DOM.HTML.Indexed.InputType (InputType(InputUrl))
 
 import Graphics.Canvas (Context2D, arc, strokePath)
 import Data.Number (tau)
@@ -63,6 +64,10 @@ render state = HTML.div
   [ Event.onClick \e -> Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
   ]
   [ HTML.slot_ _canvas TheCanvas declarativeCanvas { width: 500, height: 500, draw: draw state }
+  , HTML.form_
+    [ HTML.p_ [HTML.text "Enter image URL for background or existing card:"]
+    , HTML.input [Prop.type_ InputUrl]
+    ]
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
