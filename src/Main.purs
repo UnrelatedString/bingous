@@ -20,6 +20,10 @@ import Type.Proxy (Proxy(..))
 import Web.CSSOM.MouseEvent (offsetX, offsetY)
 import DOM.HTML.Indexed.InputType (InputType(InputUrl))
 
+import Web.HTML (window)
+import Web.HTML.Window (document)
+import Web.DOM.Document ()
+
 import Graphics.Canvas (Context2D, arc, strokePath)
 import Data.Number (tau)
 
@@ -68,6 +72,10 @@ handleAction (Click {x, y}) = H.modify_ _{clicked = {x, y}}
 handleAction (UrlInput url) = H.modify_ _{inputUrl = url}
 handleAction Ignore = pure unit
 
+-- I could use an actual Halogen ref for this but then I have to get it from HalogenM for my Canvas's Effect
+bgPreviewImgId :: String
+bgPreviewImgId = "bgPreviewImgId"
+
 render :: forall m. MonadEffect m => State -> H.ComponentHTML Action (RootSlots m) m
 render state = HTML.div
   [ Event.onClick \e -> Click { x: toNumber $ offsetX e, y: toNumber $ offsetY e }
@@ -78,13 +86,16 @@ render state = HTML.div
     , HTML.input [Prop.type_ InputUrl, Event.onValueInput UrlInput]
     ]
   , HTML.p_ [HTML.text $ "You entered: " <> state.inputUrl]
-  , HTML.img [Prop.src state.inputUrl]
+  , HTML.img [Prop.src state.inputUrl, Prop.id bgPreviewImgId]
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
 
 draw :: State -> Context2D -> Effect Unit
 draw state ctx = do
+  -- shit I just realized uh. how do I make sure the image actually loaded and rendered?? maybe I should blob
+  -- whatever I'll at least try this
+
   let { x, y } = state.clicked
   strokePath ctx do
     arc ctx
