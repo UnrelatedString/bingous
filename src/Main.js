@@ -1,4 +1,5 @@
 export const drawTheImageIGuess = (ctx) => (imgId) => () => {
     var theFuckingThing = window.document.getElementById(imgId);
-    ctx.drawImage(theFuckingThing, 0, 0)
+    //var bbbbbbb = createImageBitmap(theFuckingThing)
+    ctx.drawImage(createImageBitmap, 0, 0)
 }

@@ -82,7 +82,7 @@ render state = HTML.div
     , HTML.input [Prop.type_ InputUrl, Event.onValueInput UrlInput]
     ]
   , HTML.p_ [HTML.text $ "You entered: " <> state.inputUrl]
-  , HTML.img [Prop.src state.inputUrl, Prop.id bgPreviewImgId]
+  , HTML.img [Prop.src state.inputUrl, Prop.id bgPreviewImgId, Prop.width 200]
   , HTML.h2_ [HTML.text "wip :3"]
   , attribution
   ]
