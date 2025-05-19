@@ -1,0 +1,25 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Set up Purescript and Spago
+        run: npm i -g purescript spago@next
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Install Spago dependencies
+        run: spago install
+      - name: Build and test PureScript
+        run: spago test --strict
+      - name: Build static website
+        run: npm run build
